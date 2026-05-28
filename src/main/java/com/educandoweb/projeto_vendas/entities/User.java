@@ -3,6 +3,8 @@ package com.educandoweb.projeto_vendas.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,6 +19,10 @@ public class User implements Serializable {
     private String email;
     private String phone;
     private String password;
+
+    //Um usuário para muitas orders
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<>();
 
     public User() {
     }
@@ -47,6 +53,10 @@ public class User implements Serializable {
 
     public String getPhone() {
         return phone;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
     public void setPassword(String password) {
