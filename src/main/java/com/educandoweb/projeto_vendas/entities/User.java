@@ -1,5 +1,6 @@
 package com.educandoweb.projeto_vendas.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -20,6 +21,8 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
+    //Para que não se crie uma chave de mão dupla  um loop entre Order e User
+    @JsonIgnore
     //Um usuário para muitas orders
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
