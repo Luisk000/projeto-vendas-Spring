@@ -1,6 +1,7 @@
 package com.educandoweb.projeto_vendas.entities;
 
 import com.educandoweb.projeto_vendas.entities.pk.OrderItemPk;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -17,7 +18,7 @@ public class OrderItem implements Serializable {
     //Teremos uma chave composta com Product_Id e Order_Id
     //Lembrando que as outras propriedades de Product e Order não serão adicionadas, apenas a referência (o Id)
     @EmbeddedId
-    private OrderItemPk id;
+    private OrderItemPk id = new OrderItemPk();
 
     private Integer quantity;
     private Double price;
@@ -33,6 +34,7 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
 
+    @JsonIgnore
     public Order getOrder() {
         return id.getOrder();
     }
