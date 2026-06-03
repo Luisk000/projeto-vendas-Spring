@@ -31,3 +31,15 @@ public enum OrderStatus {
   }
 }
 ```
+- Fazendo uma relação ManyToMany, uma nova tabela chamada TB_PRODUCT_CATEGORY será criada
+- Em product:
+```java
+@ManyToMany
+@JoinTable(name="tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+private Set<Category> categories = new HashSet<>();
+```
+Em category:
+```java
+@ManyToMany(mappedBy = "categories")
+private Set<Product> products = new HashSet<>();
+```[web-services-Spring-Boot-JPA-Hibernate (4).pdf](../../Downloads/web-services-Spring-Boot-JPA-Hibernate%20%284%29.pdf)

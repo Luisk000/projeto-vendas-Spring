@@ -1,5 +1,6 @@
 package com.educandoweb.projeto_vendas.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -17,7 +18,9 @@ public class Category implements Serializable {
     private Long id;
     private String name;
 
-    @Transient
+    //Com JsonIgnore, products não irá aparecer em um get, assim impedindo um loop infinito de dados om Product
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
     private Set<Product> products = new HashSet<>();
 
     public Category(){
