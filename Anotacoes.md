@@ -42,4 +42,8 @@ Em category:
 ```java
 @ManyToMany(mappedBy = "categories")
 private Set<Product> products = new HashSet<>();
-```[web-services-Spring-Boot-JPA-Hibernate (4).pdf](../../Downloads/web-services-Spring-Boot-JPA-Hibernate%20%284%29.pdf)
+```
+[web-services-Spring-Boot-JPA-Hibernate (4).pdf](../../Downloads/web-services-Spring-Boot-JPA-Hibernate%20%284%29.pdf)
+
+- Na relação 1 por 1 de Order e Payment, cada Order possui 1 ou 0 Payment, enquanto um Payment possui obrigatoriamente 1 Order, assim como está indicado no diagrama no PDF
+- Order é a classe independente, e Payment é a classe dependente
