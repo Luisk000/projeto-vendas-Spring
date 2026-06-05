@@ -5,7 +5,9 @@ import com.educandoweb.projeto_vendas.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -28,5 +30,14 @@ public class UserResource {
     public ResponseEntity<User> findById(@PathVariable long id) {
         User user = service.findById(id);
         return ResponseEntity.ok().body(user);
+    }
+
+    //@RequestBody para que user seja o body da requisição
+    @PostMapping
+    public ResponseEntity<User> insert(@RequestBody User user) {
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{ID}").buildAndExpand(user.getId()).toUri();
+        //Retorna 201 CREATED em caso de sucesso
+        return ResponseEntity.created(uri).body(user);
     }
 }
