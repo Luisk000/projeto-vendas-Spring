@@ -32,4 +32,17 @@ public class UserService {
     public void delete(Long id){
         repository.deleteById(id);
     }
+
+    public User update(Long id, User obj){
+        //getReferenceById antigamente era getOne
+        //A diferença para findById, é que getReferenceById apenas prepara o objeto para que seja feita uma operação, enquanto findById traz o objeto
+        User entity = repository.getReferenceById(id);
+        updateData(entity, obj);
+        return repository.save(entity);
+    }
+
+    private void updateData(User entity, User obj){
+        entity.setNome(obj.getNome());
+        entity.setEmail(obj.getEmail());
+    }
 }
