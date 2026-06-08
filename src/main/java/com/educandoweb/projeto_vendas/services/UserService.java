@@ -2,9 +2,11 @@ package com.educandoweb.projeto_vendas.services;
 
 import com.educandoweb.projeto_vendas.entities.User;
 import com.educandoweb.projeto_vendas.repositories.UserRepository;
+import com.educandoweb.projeto_vendas.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.module.ResolutionException;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +22,7 @@ public class UserService {
 
     public User findById(Long id){
         Optional<User> user = repository.findById(id);
-        return user.get();
+        return user.orElseThrow(() -> new ResourceNotFoundException(id));
 
         //Ou return repository.findById(id).get();
     }
