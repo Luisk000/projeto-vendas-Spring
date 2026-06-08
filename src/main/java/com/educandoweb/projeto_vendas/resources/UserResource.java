@@ -40,4 +40,11 @@ public class UserResource {
         //Retorna 201 CREATED em caso de sucesso
         return ResponseEntity.created(uri).body(user);
     }
+
+    //@PathVariable faz com que o id seja uma variável da url
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
