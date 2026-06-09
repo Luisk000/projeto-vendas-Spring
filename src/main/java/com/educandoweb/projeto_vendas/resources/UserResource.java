@@ -35,6 +35,7 @@ public class UserResource {
     //@RequestBody para que user seja o body da requisição
     @PostMapping
     public ResponseEntity<User> insert(@RequestBody User user) {
+        service.insert(user);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{ID}").buildAndExpand(user.getId()).toUri();
         //Retorna 201 CREATED em caso de sucesso
