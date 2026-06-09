@@ -4,12 +4,12 @@ import com.educandoweb.projeto_vendas.entities.User;
 import com.educandoweb.projeto_vendas.repositories.UserRepository;
 import com.educandoweb.projeto_vendas.services.exceptions.DatabaseException;
 import com.educandoweb.projeto_vendas.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import java.lang.module.ResolutionException;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,11 +47,17 @@ public class UserService {
     }
 
     public User update(Long id, User obj){
-        //getReferenceById antigamente era getOne
-        //A diferença para findById, é que getReferenceById apenas prepara o objeto para que seja feita uma operação, enquanto findById traz o objeto
-        User entity = repository.getReferenceById(id);
-        updateData(entity, obj);
-        return repository.save(entity);
+        try{
+            //getReferenceById antigamente era getOne
+            //A diferença para findById, é que getReferenceById apenas prepara o objeto para que seja feita uma operação, enquanto findById traz o objeto
+            User entity = repository.getReferenceById(id);
+            updateData(entity, obj);
+            return repository.save(entity);
+        }
+        catch (EntityNotFoundException e){
+            throw new ResourceNotFoundException(id);
+        }
+
     }
 
     private void updateData(User entity, User obj){
