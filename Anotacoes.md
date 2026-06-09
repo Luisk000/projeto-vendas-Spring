@@ -43,10 +43,9 @@ Em category:
 @ManyToMany(mappedBy = "categories")
 private Set<Product> products = new HashSet<>();
 ```
-[web-services-Spring-Boot-JPA-Hibernate (4).pdf](../../Downloads/web-services-Spring-Boot-JPA-Hibernate%20%284%29.pdf)
 
 - Na relação 1 por 1 de Order e Payment, cada Order possui 1 ou 0 Payment, enquanto um Payment possui obrigatoriamente 1 Order, assim como está indicado no diagrama no PDF
 - Order é a classe independente, e Payment é a classe dependente
-- Faz mas sentido um pedido ter o pagamento do que o pagamento ter o pedido, então colocamos o Json ignore em orders, em Payment
-- No java EE, o colocar um método, por exemplo, getTotal em uma classe, seguindo essa nomenclatura automaticamente teremos uma propriedade Total no json
+- Faz mais sentido um pedido ter o pagamento do que o pagamento ter o pedido, então colocamos o Json ignore em orders, em Payment
+- No java EE, o colocar um método, por exemplo, getTotal numa classe, seguindo essa nomenclatura automaticamente teremos uma propriedade Total no json
 - 
